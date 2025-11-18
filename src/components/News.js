@@ -86,8 +86,6 @@ const News = (props) => {
             curr_date,
             curr_month,
         }
-
-
     }
 
     const updateNews = async () => {
