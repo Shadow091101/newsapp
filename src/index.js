@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import ProfileState from './context/Profile/profileState';
+import BookmarkState from './context/Bookmark/bookmarkState';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ProfileState>
+        <BookmarkState>
         <App />
+        </BookmarkState>
       </ProfileState>
     </BrowserRouter>
   </React.StrictMode>

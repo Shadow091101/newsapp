@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from './components/Navbar';
 import News from './components/News';
 import Login from './components/Login';
@@ -13,6 +13,9 @@ import {
 import LoadingBar from 'react-top-loading-bar'
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Bookmarks from './components/Bookmarks';
+import History from "./components/History";
+
 
 const App = () => {
   // console.log()
@@ -39,16 +42,16 @@ const App = () => {
     setProgress(value)
   }
 
-  
-  useEffect(()=>{
-    const token=localStorage.getItem('token');
-    if(!token && location.pathname!=="/signup" && location.pathname!=="/login"){
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token && location.pathname !== "/signup" && location.pathname !== "/login") {
       navigate('/login');
     }
     setIsAuthChecked(true);
-  },[location.pathname,navigate])
+  }, [location.pathname, navigate])
   const hideNavbar = location.pathname === "/login" || location.pathname === "/signup";
-  if(!isAuthChecked) return null;
+  if (!isAuthChecked) return null;
   return (
     <div>
       {!hideNavbar && (
@@ -61,7 +64,7 @@ const App = () => {
         onLoaderFinished={() => updateProgress(0)}
       />
       <Routes>
-        <Route exact path='/' element={<News key={searchText + "home"} updateProgress={updateProgress} category="general" title='Top-HeadLines' updateSearchText={updateSearchText} apiKey={apiKey} updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path='/' element={<News key={searchText + "home"} query={searchText} updateProgress={updateProgress} category="general" title='Top-HeadLines' updateSearchText={updateSearchText} apiKey={apiKey} updateDropDownTitle={updateDropDownTitle} />} />
         <Route exact path='/login' element={<Login></Login>} />
         <Route exact path='/signup' element={<Signup></Signup>} />
         <Route exact path='/business' element={<News key={searchText + "business"} updateProgress={updateProgress} category="business" title='Business' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
@@ -71,6 +74,8 @@ const App = () => {
         <Route exact path='/science' element={<News key={searchText + "science"} updateProgress={updateProgress} category="science" title='Science' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
         <Route exact path='/sports' element={<News key={searchText + "sports"} updateProgress={updateProgress} category="sports" title='Sports' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
         <Route exact path='/technology' element={<News key={searchText + "technology"} updateProgress={updateProgress} category="technology" title='Technology' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path='/bookmarks' element={<Bookmarks />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </div>
   )

@@ -116,6 +116,7 @@ const News = (props) => {
         } finally {
             setLoading(false);
             props.updateProgress(100);
+           
         }
     }
 
@@ -123,26 +124,23 @@ const News = (props) => {
         updateNews();
     }, [page, props.query, props.category])//effect will run when page or query or category changes
 
-    const handlepreviousclick = async () => {
-        setPage(page - 1);
+    useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
+    }, [articles]);
 
+    const handlepreviousclick = async () => {
+        setPage(page - 1);
     }
 
     const handlenextclick = async () => {
         setPage(page + 1)
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-
     }
     return (
         <div className='news-container   my-3 mx-2' >
-            <h2 className='mx-5' style={{marginTop:'70px'}}>{props.title}</h2>
+            <h2 className='mx-5' style={{ marginTop: '70px' }}>{props.title}</h2>
             {/* <h5>{props.searchQuery}</h5> */}
             <h5 className='mx-5'>
                 {props.query && props.query !== '[object Object]' ? `Searching for ${props.query}` : ''}
@@ -161,13 +159,13 @@ const News = (props) => {
 
 
                         return <div className="col cols-md-3" key={element.url}>
-                            <NewsItem title={Title} description={Description} imageurl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} sources={element.source.name} />
+                            <NewsItem title={Title} description={Description} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
                         </div>
 
                     })
 
 
-                ) : (!loading && <NoArticle/>)
+                ) : (!loading && <NoArticle />)
                 }
                 <div className="container d-flex  justify-content-between my-3">
                     <button disabled={page <= 1} type="button" className="btn btn-info" onClick={handlepreviousclick}> &larr; Previous</button>
@@ -175,7 +173,7 @@ const News = (props) => {
                         height: '27px', position: "relative",
                         top: "18%"
                     }}>
-                        Page No: {totalResults >= 100 ? `${page}/${Math.ceil(100 / 20)}` : `${page}/${(Math.ceil(totalResults / 20)==0?'1':Math.ceil(totalResults / 20))}`}
+                        Page No: {totalResults >= 100 ? `${page}/${Math.ceil(100 / 20)}` : `${page}/${(Math.ceil(totalResults / 20) === 0 ? '1' : Math.ceil(totalResults / 20))}`}
                     </span>
 
                     <button
