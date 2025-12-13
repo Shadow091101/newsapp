@@ -16,9 +16,9 @@ const Bookmarks = (props) => {
         // const sortOrder="desc"
         bookmarks.sort((a, b) => {
             if (sortOrder === "asc") {
-                return new Date(a.date) - new Date(b.date); // Oldest → Newest
+                return new Date(a.BookmarkDate) - new Date(b.BookmarkDate); // Oldest → Newest
             }
-            return new Date(b.date) - new Date(a.date); // Newest → Oldest
+            return new Date(b.BookmarkDate) - new Date(a.BookmarkDate); // Newest → Oldest
         });
     };
 
@@ -139,6 +139,7 @@ const Bookmarks = (props) => {
 
     useEffect(() => {
         getBookmarks();
+        sortBookmarks("desc")
         // updateNews();
     }, [])//effect will run when page or query or category changes
 
@@ -170,7 +171,7 @@ const Bookmarks = (props) => {
         <div className='bookmark-container my-3 mx-2' >
             <div className="header d-flex mt-5 justify-content-between" style={{ alignItems: "center" }}>
                 <h2 className='mx-5 mt-3' style={{ marginTop: '70px', alignItems: "center" }}>Bookmarks</h2>
-                <button className='btn btn-primary me-5 mt-3' style={{ height: "fit-content" }} onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>Sort by Date: {sortOrder === "asc" ? "Oldest → Newest" : "Newest → Oldest"}</button>
+                <button className='btn btn-outline-primary me-5 mt-3' style={{ height: "fit-content" }} onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}>Sort by Date: {sortOrder === "asc" ? "Oldest → Newest" : "Newest → Oldest"}</button>
             </div>
 
             {/* <h5>{props.searchQuery}</h5> */}

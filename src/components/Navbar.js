@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import profileContext from '../context/Profile/profileContext'
 import "../navbar.css"
+import Logo from "./Logo.js"
+
 
 // import PropTypes from 'prop-types'
 
@@ -47,7 +49,7 @@ function Navbar(props) {
         <div>
             <nav className="navbar  navbar-expand-lg bg-body-tertiary fixed-top">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/" onClick={() => props.updateDropDownTitle("Category")}>NewsNerd</Link>
+                    <Link className="navbar-brand" to="/" onClick={() => props.updateDropDownTitle("Category")}><Logo/></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -55,9 +57,6 @@ function Navbar(props) {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link className="nav-link active" aria-current="page" to="/" onClick={() => props.updateDropDownTitle("Category")}>Home</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/">About</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -118,9 +117,9 @@ function Navbar(props) {
                                     />
 
                                     <ul className={`dropdown-menu ${drop_down_state ? "show" : ""}`} style={{ right: 0, left: "auto" }}>
-                                        <li><Link onClick={()=>{set_drop_down_state(false)}}className="dropdown-item" to="/profile"><i className="bi bi-person"></i> My Profile</Link></li>
-                                        <li><Link onClick={()=>{set_drop_down_state(false)}} className="dropdown-item" to="/bookmarks"><i className="bi bi-bookmark"></i> Bookmarks</Link></li>
-                                        <li><Link onClick={()=>{set_drop_down_state(false)}} className="dropdown-item" to="/history"><i className="bi bi-clock-history"></i> History</Link></li>
+                                        <li><Link onClick={() => { set_drop_down_state(false) }} className="dropdown-item" to="/profile"><i className="bi bi-person"></i> My Profile</Link></li>
+                                        <li><Link onClick={() => { set_drop_down_state(false) }} className="dropdown-item" to="/bookmarks"><i className="bi bi-bookmark"></i> Bookmarks</Link></li>
+                                        <li><Link onClick={() => { set_drop_down_state(false) }} className="dropdown-item" to="/history"><i className="bi bi-clock-history"></i> History</Link></li>
                                         <li><hr className="dropdown-divider" /></li>
                                         <li><button className="dropdown-item" onClick={() => { localStorage.removeItem('token'); window.location.href = '/login'; }}><i className="bi bi-box-arrow-right"></i> Logout</button></li>
                                     </ul>

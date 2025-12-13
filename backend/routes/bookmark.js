@@ -26,6 +26,7 @@ router.get('/getbookmarks', fetchuser, async (req, res) => {
     try {
         const bookmarks = await Bookmark.find({ user: req.user.id });
         res.json(bookmarks);
+        console.log(bookmarks)
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server error!!!");

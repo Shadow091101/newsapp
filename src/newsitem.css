@@ -19,6 +19,10 @@
 .card {
   border-radius: 12px;
   transition: box-shadow 0.3s ease; /* smooth glow */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 18rem;
 }
 
 .card:hover {
@@ -27,3 +31,58 @@
       0 0 24px rgba(0, 140, 255, 0.5),
       0 0 36px rgba(0, 140, 255, 0.3);
 }
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* allows card-body to fill available space */
+}
+
+.bottom {
+  margin-top: auto; /* pushes it to the bottom */
+  display: flex;
+  justify-content: space-between;
+  /* justify-content: flex-start; left align buttons */
+  gap: 0.5rem; /* spacing between buttons */
+}
+.twobtns{
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media(max-width:616px){
+  .newsitem-container{
+    width: 100%;
+    margin-left: 1vw;
+    margin-right: 1vw;
+  }
+  .card{
+    width: 100%;
+  }
+  .card-body{
+    width: 100%;
+  }
+  /* .btn{
+    height: 35px;
+    width: 35px;
+    display: flex;
+  }
+  .bi{
+    height: 12px;
+    width: 12px;
+    justify-content: center;
+  } */
+}
+@media (min-width: 616px) {
+  .newsitem-container{
+    width: 100%;
+    margin-left: 1vw;
+    margin-right: 1vw;
+  }
+  .card{
+    width: 100%;
+  }
+  .card-body{
+    width: 100%;
+  }
+}
+

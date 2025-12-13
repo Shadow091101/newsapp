@@ -55,7 +55,7 @@ const App = () => {
   return (
     <div>
       {!hideNavbar && (
-        <Navbar drop_down_title={drop_down_title} updateSearchText={updateSearchText} />
+        <Navbar drop_down_title={drop_down_title} updateSearchText={updateSearchText} updateDropDownTitle={updateDropDownTitle} />
       )}
       <LoadingBar
         color='#f11946'

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import "../history.css";
+import "../history.css";
 
 export default function History() {
   const [history, setHistory] = useState([]);
@@ -35,7 +35,7 @@ export default function History() {
       <div className="d-flex justify-content-between mb-3" style={{ alignItems: "center" }}>
         <h2>Your History</h2>
         {history.length > 0 && (
-          <button onClick={clearHistory} className="btn btn-danger ">
+          <button onClick={clearHistory} className="btn btn-outline-danger ">
             Clear History
           </button>
         )}
@@ -48,21 +48,21 @@ export default function History() {
       <div className="row">
         {history.map((item, index) => (
           <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" key={index}>
-
             <div className="card h-100 shadow-sm">
-              <img
-                src={item.image || defaultImage}
-                alt="News"
-                className="card-img-top"
-                style={{
-                  height: "200px",
-                  objectFit: "cover"
-                }}
-                onError={(e) => {
-                  e.target.src = process.env.PUBLIC_URL + "/assets/images/logo.png";
-                }}
-              />
-
+              <div className="image-wrapper">
+                <img
+                  src={item.image || defaultImage}
+                  alt="News"
+                  className="card-img-top"
+                  style={{
+                    height: "200px",
+                    objectFit: "cover"
+                  }}
+                  onError={(e) => {
+                    e.target.src = process.env.PUBLIC_URL + "/assets/images/logo.png";
+                  }}
+                />
+              </div>
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">
                   {item.title.length > 50
@@ -76,18 +76,18 @@ export default function History() {
                   </small>
                 </p>
 
-                <div className="mt-auto d-flex">
+                <div className="mt-auto d-flex justify-content-between">
                   <a
                     rel="noreferrer"
                     href={item.url}
                     target="_blank"
-                    className="btn btn-primary"
+                    className="btn btn-outline-primary"
                   >
                     Read More
                   </a>
 
                   <button
-                    className="btn btn-secondary ms-2"
+                    className="btn btn-outline-secondary ms-2"
                     onClick={() => shareNews(item.title, item.url)}
                   >
                     <i className="bi bi-share"></i>

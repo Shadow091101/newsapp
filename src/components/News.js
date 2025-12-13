@@ -3,7 +3,8 @@ import NewsItem from './NewsItem'
 import Spinner from './Spinner';
 import PropTypes from 'prop-types'
 import NoArticle from './NoArticle';
-
+// import NoArticleFound from "./NoA"
+import '../news.css'
 
 const News = (props) => {
     const [articles, setArticles] = useState([]);
@@ -116,7 +117,7 @@ const News = (props) => {
         } finally {
             setLoading(false);
             props.updateProgress(100);
-           
+
         }
     }
 
@@ -140,7 +141,7 @@ const News = (props) => {
     }
     return (
         <div className='news-container   my-3 mx-2' >
-            <h2 className='mx-5' style={{ marginTop: '70px' }}>{props.title}</h2>
+            <h2 className="mx-4 title" style={{ marginTop: '70px' }}>{props.title}</h2>
             {/* <h5>{props.searchQuery}</h5> */}
             <h5 className='mx-5'>
                 {props.query && props.query !== '[object Object]' ? `Searching for ${props.query}` : ''}
@@ -149,43 +150,69 @@ const News = (props) => {
             {/* if loading is true then put spinner */}
             <div className="row">
                 {articles && articles.length > 0 ? (
-                    articles.map((element) => {
+                    <>
+                        {articles.map((element) => {
+                            let Title = element.title == null ? "No Title" : element.title;
+                            let Description = element.description == null ? "No Description" : element.description;
 
-                        let realTitle = element.title == null ? "No Title" : element.title
-                        let Title = realTitle.length >= 45 ? realTitle.slice(0, 45) + '...' : realTitle
+                            return (
+                                <div className="news-card-column" key={element.url}>
+                                    <NewsItem
+                                        title={Title}
+                                        description={Description}
+                                        imageUrl={element.urlToImage}
+                                        newsUrl={element.url}
+                                        author={element.author}
+                                        date={element.publishedAt}
+                                        source={element.source.name}
+                                    />
+                                </div>
+                            );
+                        })}
 
-                        let realDescription = element.description == null ? "No Description" : element.description
-                        let Description = realDescription.length >= 88 ? realDescription.slice(0, 88) + '...' : realDescription
+                        {/* Pagination visible ONLY when articles exist */}
+                        <div className="container d-flex justify-content-between my-3">
+                            <button
+                                disabled={page <= 1}
+                                type="button"
+                                className="btn btn-info"
+                                onClick={handlepreviousclick}
+                            >
+                                &larr; Previous
+                            </button>
 
+                            <span
+                                className="badge bg-primary text-light px-2 py-2"
+                                style={{
+                                    height: "27px",
+                                    position: "relative",
+                                    top: "18%",
+                                }}
+                            >
+                                Page No:{" "}
+                                {totalResults >= 100
+                                    ? `${page}/${Math.ceil(100 / 20)}`
+                                    : `${page}/${Math.ceil(totalResults / 20) === 0 ? 1 : Math.ceil(totalResults / 20)}`}
+                            </span>
 
-                        return <div className="col cols-md-3" key={element.url}>
-                            <NewsItem title={Title} description={Description} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
+                            <button
+                                disabled={
+                                    totalResults >= 100
+                                        ? page >= Math.ceil(100 / 20)
+                                        : page >= Math.ceil(totalResults / 20)
+                                }
+                                type="button"
+                                className="btn btn-info"
+                                onClick={handlenextclick}
+                            >
+                                Next &rarr;
+                            </button>
                         </div>
+                    </>
+                ) : (
+                    !loading && <NoArticle /> // Video shown here
+                )}
 
-                    })
-
-
-                ) : (!loading && <NoArticle />)
-                }
-                <div className="container d-flex  justify-content-between my-3">
-                    <button disabled={page <= 1} type="button" className="btn btn-info" onClick={handlepreviousclick}> &larr; Previous</button>
-                    <span className="badge bg-primary text-light px-2 py-2" style={{
-                        height: '27px', position: "relative",
-                        top: "18%"
-                    }}>
-                        Page No: {totalResults >= 100 ? `${page}/${Math.ceil(100 / 20)}` : `${page}/${(Math.ceil(totalResults / 20) === 0 ? '1' : Math.ceil(totalResults / 20))}`}
-                    </span>
-
-                    <button
-                        disabled={totalResults >= 100 ? page >= Math.ceil(100 / 20) : page >= Math.ceil(totalResults / 20)}
-                        type="button"
-                        className="btn btn-info"
-                        onClick={handlenextclick}
-                    >
-                        Next &rarr;
-                    </button>
-
-                </div>
             </div>
         </div>
     )

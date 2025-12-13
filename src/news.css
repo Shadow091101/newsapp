@@ -1,0 +1,43 @@
+/* Default: 1 card per row */
+
+/* .news-card-column {
+  width: 100%;
+} */
+
+.row{
+    padding-right: calc(var(--bs-gutter-x)* .3);
+}
+@media (max-width: 615px) {
+  
+.news-card-column {
+  width: 100%;
+}
+}
+
+/* Above 615px = 2 cards per row */
+@media (min-width: 616px) {
+  .news-card-column {
+    width: 50%;   /* 2 per row */
+  }
+}
+
+/* Above 900px = 3 cards (optional) */
+@media (min-width: 900px) {
+  .news-card-column {
+    width: 33.33%;
+  }
+}
+
+/* Above 1200px = 4 cards (optional) */
+@media (min-width: 1200px) {
+  .news-card-column {
+    width: 25%;
+  }
+}
+
+@media (max-width:615px){
+    .title{
+        text-align: center;
+    }
+}
+
