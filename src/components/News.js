@@ -3,7 +3,6 @@ import NewsItem from './NewsItem'
 import Spinner from './Spinner';
 import PropTypes from 'prop-types'
 import NoArticle from './NoArticle';
-// import NoArticleFound from "./NoA"
 import '../news.css'
 
 const News = (props) => {
@@ -19,7 +18,7 @@ const News = (props) => {
         let curr_month = date.getMonth();
         let from_curr_month;
 
-        if (curr_month >= 0 && curr_date != 1) {
+        if (curr_month >= 0 && curr_date !== 1) {
             from_curr_month = curr_month + 1
         }
 
@@ -30,47 +29,47 @@ const News = (props) => {
             from_curr_month = 12
 
         }
-        else if (curr_month == 1 && curr_date == 1) {//feb
+        else if (curr_month === 1 && curr_date === 1) {//feb
             curr_date = 28
             from_curr_month = 1//jan
         }
-        else if (curr_month == 2 && curr_date == 1) {//mar
+        else if (curr_month === 2 && curr_date === 1) {//mar
             curr_date = 28
             from_curr_month = 2//feb
         }
-        else if (curr_month == 3 && curr_date == 1) {//apr
+        else if (curr_month === 3 && curr_date === 1) {//apr
             curr_date = 28
             from_curr_month = 3//mar
         }
-        else if (curr_month == 4 && curr_date == 1) {//may
+        else if (curr_month === 4 && curr_date === 1) {//may
             curr_date = 28
             from_curr_month = 4//apr
         }
-        else if (curr_month == 5 && curr_date == 1) {//jun
+        else if (curr_month === 5 && curr_date === 1) {//jun
             curr_date = 28
             from_curr_month = 5//may
         }
-        else if (curr_month == 6 && curr_date == 1) {//july
+        else if (curr_month === 6 && curr_date === 1) {//july
             curr_date = 28
             from_curr_month = 6//jun
         }
-        else if (curr_month == 7 && curr_date == 1) {//aug
+        else if (curr_month === 7 && curr_date === 1) {//aug
             curr_date = 28
             from_curr_month = 7//july
         }
-        else if (curr_month == 8 && curr_date == 1) {//sep
+        else if (curr_month === 8 && curr_date === 1) {//sep
             curr_date = 28
             from_curr_month = 8//aug
         }
-        else if (curr_month == 9 && curr_date == 1) {//oct
+        else if (curr_month === 9 && curr_date === 1) {//oct
             curr_date = 28
             from_curr_month = 9//sep
         }
-        else if (curr_month == 10 && curr_date == 1) {//november
+        else if (curr_month === 10 && curr_date === 1) {//november
             curr_date = 28
             from_curr_month = 10//oct
         }
-        else if (curr_month == 11 && curr_date == 1) {//december
+        else if (curr_month === 11 && curr_date === 1) {//december
             curr_date = 28
             from_curr_month = 11//november
         }
@@ -91,7 +90,6 @@ const News = (props) => {
 
     const updateNews = async () => {
         props.updateProgress(10)
-        // let parsedQuery = props.query ? `&q=${props.query.split(' ').join('+')}` : '';
         console.log('Search text 3 = ', props.query);
 
         const { full_year, from_curr_month, curr_month, curr_date } = getDates();
@@ -100,7 +98,6 @@ const News = (props) => {
             ? `&q=${props.query.split(' ').join('+')}`
             : '';
         let url = `https://newsapi.org/v2/top-headlines?country=${props.country}${searchQuery}&category=${props.category}&pageSize=20&page=${page}&from=${full_year}-${from_curr_month}-${curr_date - 1}&to=${full_year}-${curr_month + 1}-${curr_date}&apiKey=${props.apiKey}`
-        // let url = `https://newsapi.org/v2/top-headlines?country=us&pageSize=20&category=science&page=1&apiKey=ea2d177abf4b46eba102a2bd760ee125`
 
         setLoading(true);
         props.updateProgress(30);
@@ -152,8 +149,8 @@ const News = (props) => {
                 {articles && articles.length > 0 ? (
                     <>
                         {articles.map((element) => {
-                            let Title = element.title == null ? "No Title" : element.title;
-                            let Description = element.description == null ? "No Description" : element.description;
+                            let Title = element.title === null ? "No Title" : element.title;
+                            let Description = element.description === null ? "No Description" : element.description;
 
                             return (
                                 <div className="news-card-column" key={element.url}>
@@ -165,6 +162,7 @@ const News = (props) => {
                                         author={element.author}
                                         date={element.publishedAt}
                                         source={element.source.name}
+                                        category={props.category}
                                     />
                                 </div>
                             );
@@ -236,4 +234,3 @@ News.propTypes = {
 };
 
 export default News
-// my newsapi key

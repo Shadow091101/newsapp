@@ -4,9 +4,6 @@ import profileContext from '../context/Profile/profileContext'
 import "../navbar.css"
 import Logo from "./Logo.js"
 
-
-// import PropTypes from 'prop-types'
-
 function Navbar(props) {
     const { user, getUser } = useContext(profileContext)
 
@@ -14,25 +11,15 @@ function Navbar(props) {
 
     const [drop_down_state, set_drop_down_state] = useState(false)
     useEffect(() => {
-        // alert("Calling GetUser");
         getUser();
     }, [getUser]);
 
-    //     if(!user){
-    // alert("No user")
-    //     }else{
-    //     console.log(user);
-    //     }
-
     const dropdown = () => {
         if (drop_down_state) {
-            // alert("Dropdown is closing")
             set_drop_down_state(false)
         } else {
-            // alert("Dropdown is opening")
             set_drop_down_state(true)
         }
-        // alert("Hello")
     }
 
     const handleChange = (e) => {
@@ -64,56 +51,44 @@ function Navbar(props) {
                                 </Link>
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to="/business" onClick={() => {
-                                        // props.updateDropDownTitle("Business");
                                         props.updateSearchText("");
                                     }}>Business</Link></li>
                                     <li><Link className="dropdown-item" to="/entertainment" onClick={() => {
-                                        // props.updateDropDownTitle("Business");
                                         props.updateSearchText("");
                                     }}>Entertainment</Link></li>
                                     <li><Link className="dropdown-item" to="/general" onClick={() => {
-                                        // props.updateDropDownTitle("Business");
                                         props.updateSearchText("");
                                     }}>General</Link></li>
                                     <li><Link className="dropdown-item" to="/health" onClick={() => {
-                                        // props.updateDropDownTitle("Business");
                                         props.updateSearchText("");
                                     }}>Health</Link></li>
                                     <li><Link className="dropdown-item" to="/science" onClick={() => {
-                                        // props.updateDropDownTitle("Business");
                                         props.updateSearchText("");
                                     }}>Science</Link></li>
                                     <li><Link className="dropdown-item" to="/sports" onClick={() => {
-                                        // props.updateDropDownTitle("Business");
                                         props.updateSearchText("");
                                     }}>Sports</Link></li>
-
                                     <li><Link className="dropdown-item" to="/technology" onClick={() => {
-                                        // props.updateDropDownTitle("Business");
                                         props.updateSearchText("");
                                     }}>Technology</Link></li>
                                 </ul>
                             </li>
-
-                            {/* <li><button className='btn btn-danger' onClick={() => { localStorage.removeItem('token'); window.location.href = '/login'; }}>Logout</button></li> */}
                         </ul>
-                        {/* <div className="container d-flex flex-end">
-                                    <p>{user?.username || "Loading..."}</p>
-                            </div> */}
                         <div className="d-flex align-items-lg-center align-items-start flex-lg-row flex-column gap-3 ms-lg-auto">
-                            {/* Username + Avatar */}
-                            <div className="d-flex align-items-center gap-3">
-                                <span className="fw-bold usernameblock">
+                            <div className="d-flex align-items-center gap-3 flex-nowrap">
+                                <span className="fw-bold usernameblock text-nowrap">
                                     {user?.username ? `Hi, ${user.username}` : "Loading..."}
                                 </span>
 
-                                <div className="dropdown">
+                                <div className="dropdown  nav-prof-pic">
                                     <img
                                         onClick={dropdown}
-                                        src={`https://ui-avatars.com/api/?name=${user?.username}&size=40&bold=true&rounded=true&background=random`}
+                                        src={user?.profileImage
+                                            ?`http://localhost:3500${user.profileImage}` 
+                                            :`https://ui-avatars.com/api/?name=${user?.username}&size=40&bold=true&rounded=true&background=${user.backgroundColor}`}
                                         alt="User Avatar"
                                         className="dropdown-toggle"
-                                        style={{ cursor: "pointer" }}
+                                        style={{ cursor: "pointer" ,height:"40px",width:"40px",objectFit:'cover'}}
                                     />
 
                                     <ul className={`dropdown-menu ${drop_down_state ? "show" : ""}`} style={{ right: 0, left: "auto" }}>

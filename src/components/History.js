@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../history.css";
+import profileContext from "../context/Profile/profileContext";
 
 export default function History() {
   const [history, setHistory] = useState([]);
-
+  const {user}=useContext(profileContext);
   useEffect(() => {
-    const savedHistory = JSON.parse(localStorage.getItem("newsHistory")) || [];
+    if (!user?._id) return
+
+    const historyKey = `history_${user._id}`;
+    const savedHistory = JSON.parse(localStorage.getItem(historyKey)) || [];
     setHistory(savedHistory);
-  }, []);
+  }, [user]);
 
   const shareNews = (title, url) => {
     if (navigator.share) {
@@ -24,9 +28,13 @@ export default function History() {
   };
 
   const clearHistory = () => {
-    localStorage.removeItem("newsHistory");
-    setHistory([]);
-  };
+      if (!user?._id) return;
+
+      const historyKey = `history_${user._id}`;
+      localStorage.removeItem(historyKey);
+      setHistory([]);
+    };
+
 
   const defaultImage = "/assets/images/logo.png";
 

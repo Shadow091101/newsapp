@@ -15,6 +15,8 @@ import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Bookmarks from './components/Bookmarks';
 import History from "./components/History";
+import Profile from './components/Profile';
+// import PrivateRoute from './components/PrivateRoute';
 
 
 const App = () => {
@@ -74,8 +76,9 @@ const App = () => {
         <Route exact path='/science' element={<News key={searchText + "science"} updateProgress={updateProgress} category="science" title='Science' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
         <Route exact path='/sports' element={<News key={searchText + "sports"} updateProgress={updateProgress} category="sports" title='Sports' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
         <Route exact path='/technology' element={<News key={searchText + "technology"} updateProgress={updateProgress} category="technology" title='Technology' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path="/profile" element={<Profile title="Hello."/>}/>
         <Route exact path='/bookmarks' element={<Bookmarks />} />
-        <Route path="/history" element={<History />} />
+        <Route exact path="/history" element={<History />} />
       </Routes>
     </div>
   )

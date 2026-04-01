@@ -54,7 +54,6 @@ router.post('/login',
     body('email', 'Enter a valid email').isEmail(),
     body('password', 'Enter a valid password').isLength({ min: 5, max: 20 }),
   ], async (req, res) => {
-    // console.log("req body : ", req.body)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -98,9 +97,4 @@ router.post('/user', fetchUser, async (req, res) => {
     res.status(500).send("Some Internal error occured")
   }
 })
-// Example route
-// router.get("/", (req, res) => {
-//   res.send("Auth route working!");
-// });
-
 module.exports = router;   // <-- IMPORTANT

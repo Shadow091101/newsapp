@@ -4,6 +4,7 @@ import Spinner from './Spinner';
 import PropTypes from 'prop-types'
 import NoArticle from './NoArticle';
 import bookmarkContext from '../context/Bookmark/bookmarkContext';
+import "../news.css"
 
 
 const Bookmarks = (props) => {
@@ -11,6 +12,7 @@ const Bookmarks = (props) => {
 
     const [sortOrder, setSortOrder] = useState("desc"); // "desc" = latest first
 
+    
 
     const sortBookmarks = () => {
         // const sortOrder="desc"
@@ -190,7 +192,7 @@ const Bookmarks = (props) => {
                         const source = element.source || "Unknown Source";               // camelCase
 
                         return (
-                            <div className="col cols-md-3" key={element._id}>
+                            <div className="news-card-column" key={element._id}>
                                 <NewsItem
                                     title={Title}
                                     description={Description}

@@ -17,6 +17,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    bio: {
+        type: String,
+        default: "No bio"
+    },
     date: {
         type: Date,
         default: () => {
@@ -24,9 +28,43 @@ const UserSchema = new Schema({
             const offset = localDate.getTimezoneOffset(); // Offset in minutes
             return new Date(localDate.getTime() - offset * 60 * 1000); // Adjust to local timezone
         }
+    },
+    backgroundColor: {
+        type: String,
+        default: "random"
+    },
+    profileImage: {
+        type: String,
+        default: null
+    },
+    articlesRead: {
+        type: Number,
+        default: 0
+    },
+    categoryStats: {
+        type: Map,
+        of: Number,
+        default: {}
+    },
+    favouriteCategory: {
+        type: String,
+        default: "None"
+    },
+    readingStreak: {
+        type: Number,
+        default: 0
+    },
+    lastReadDate: {
+        type: Date,
+        default: null
+    },
+    longestStreak: {
+        type: Number,
+        default: 0
     }
+
 });
 
-const User=mongoose.model('user',UserSchema)
+const User = mongoose.model('user', UserSchema)
 
-module.exports=User;
+module.exports = User;
