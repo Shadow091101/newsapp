@@ -15,6 +15,8 @@ const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source,
   // let realDescription = element.description == null ? "No Description" : element.description
   let Description = description.length >= 88 ? description.slice(0, 88) + '...' : description
 
+  let Author=author?.length>=50 ? author.slice(0,50) + '...' : author
+
   const [bookmarkChecked, setbookmarkChecked] = useState()
   const { bookmarks, removeBookmark, addBookmark } = useContext(bookmarkContext)
   const shareNews = (title, text, url) => {
@@ -112,7 +114,7 @@ const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source,
       if (bookmark) removeBookmark(bookmark._id);
       setbookmarkChecked(false);
     } else {
-      addBookmark({ title, description, imageUrl, newsUrl, author, date, source })
+      addBookmark({ title, description, imageUrl, newsUrl, Author, date, source })
       setbookmarkChecked(true)
     }
   }
@@ -130,7 +132,7 @@ const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source,
         <div className="card-body" >
           <h5 className="card-title" height="20px">{Title}<h5><span class="badge text-bg-secondary">{Source}</span></h5></h5>
           <p className="card-text" height="50px">{Description}</p>
-          <p className="card-text"><small className="text-body-secondary">By {author || 'Unknown'} on {new Date(date).toUTCString()}</small></p>
+          <p className="card-text"><small className="text-body-secondary">By {Author || 'Unknown'} on {new Date(date).toUTCString()}</small></p>
           <div className="bottom">
 
             <a rel='noreferrer' onClick={saveToHistory} href={newsUrl} target='_blank' className="btn btn-outline-primary">Read More</a>
