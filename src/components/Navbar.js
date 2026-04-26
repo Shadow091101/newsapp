@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import profileContext from '../context/Profile/profileContext'
 import "../navbar.css"
@@ -10,18 +10,27 @@ function Navbar(props) {
     const [searchText, setSearchText] = useState('')
 
     const [drop_down_state, set_drop_down_state] = useState(false)
+
+    const dropdownRef = useRef(null);
+
+
     useEffect(() => {
         getUser();
     }, [getUser]);
 
-    const dropdown = () => {
-        if (drop_down_state) {
-            set_drop_down_state(false)
-        } else {
-            set_drop_down_state(true)
-        }
-    }
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                set_drop_down_state(false);
+            }
+        };
 
+        document.addEventListener("click", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
     const handleChange = (e) => {
         setSearchText(e.target.value)
     }
@@ -31,12 +40,23 @@ function Navbar(props) {
         props.updateSearchText(searchText)
         setSearchText('');
     }
+    const closeNavbar = () => {
+        const navbar = document.getElementById("navbarSupportedContent")
+        if (navbar.classList.contains("show")) {
+            navbar.classList.remove("show");
+        }
+    }
+
+    const dropdown = (e) => {
+        e.stopPropagation();
+        set_drop_down_state(prev => !prev);
+    }
 
     return (
         <div>
             <nav className="navbar  navbar-expand-lg bg-body-tertiary fixed-top">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/" onClick={() => props.updateDropDownTitle("Category")}><Logo/></Link>
+                    <Link className="navbar-brand" to="/" onClick={() => props.updateDropDownTitle("Category")}><Logo /></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -52,24 +72,31 @@ function Navbar(props) {
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to="/business" onClick={() => {
                                         props.updateSearchText("");
+                                        closeNavbar();
                                     }}>Business</Link></li>
                                     <li><Link className="dropdown-item" to="/entertainment" onClick={() => {
                                         props.updateSearchText("");
+                                        closeNavbar();
                                     }}>Entertainment</Link></li>
                                     <li><Link className="dropdown-item" to="/general" onClick={() => {
                                         props.updateSearchText("");
+                                        closeNavbar();
                                     }}>General</Link></li>
                                     <li><Link className="dropdown-item" to="/health" onClick={() => {
                                         props.updateSearchText("");
+                                        closeNavbar();
                                     }}>Health</Link></li>
                                     <li><Link className="dropdown-item" to="/science" onClick={() => {
                                         props.updateSearchText("");
+                                        closeNavbar();
                                     }}>Science</Link></li>
                                     <li><Link className="dropdown-item" to="/sports" onClick={() => {
                                         props.updateSearchText("");
+                                        closeNavbar();
                                     }}>Sports</Link></li>
                                     <li><Link className="dropdown-item" to="/technology" onClick={() => {
                                         props.updateSearchText("");
+                                        closeNavbar();
                                     }}>Technology</Link></li>
                                 </ul>
                             </li>
@@ -80,21 +107,21 @@ function Navbar(props) {
                                     {user?.username ? `Hi, ${user.username}` : "Loading..."}
                                 </span>
 
-                                <div className="dropdown  nav-prof-pic">
+                                <div ref={dropdownRef} className="dropdown nav-prof-pic">
                                     <img
                                         onClick={dropdown}
                                         src={user?.profileImage
-                                            ?`http://localhost:3500${user.profileImage}` 
-                                            :`https://ui-avatars.com/api/?name=${user?.username}&size=40&bold=true&rounded=true&background=${user.backgroundColor}`}
+                                            ? `http://localhost:3500${user.profileImage}`
+                                            : `https://ui-avatars.com/api/?name=${user?.username}&size=40&bold=true&rounded=true&background=${user.backgroundColor}`}
                                         alt="User Avatar"
                                         className="dropdown-toggle"
-                                        style={{ cursor: "pointer" ,height:"40px",width:"40px",objectFit:'cover'}}
+                                        style={{ cursor: "pointer", height: "40px", width: "40px", objectFit: 'cover' }}
                                     />
 
                                     <ul className={`dropdown-menu ${drop_down_state ? "show" : ""}`} style={{ right: 0, left: "auto" }}>
-                                        <li><Link onClick={() => { set_drop_down_state(false) }} className="dropdown-item" to="/profile"><i className="bi bi-person"></i> My Profile</Link></li>
-                                        <li><Link onClick={() => { set_drop_down_state(false) }} className="dropdown-item" to="/bookmarks"><i className="bi bi-bookmark"></i> Bookmarks</Link></li>
-                                        <li><Link onClick={() => { set_drop_down_state(false) }} className="dropdown-item" to="/history"><i className="bi bi-clock-history"></i> History</Link></li>
+                                        <li><Link onClick={() => { set_drop_down_state(false); closeNavbar(); }} className="dropdown-item" to="/profile"><i className="bi bi-person"></i> My Profile</Link></li>
+                                        <li><Link onClick={() => { set_drop_down_state(false); closeNavbar(); }} className="dropdown-item" to="/bookmarks"><i className="bi bi-bookmark"></i> Bookmarks</Link></li>
+                                        <li><Link onClick={() => { set_drop_down_state(false); closeNavbar(); }} className="dropdown-item" to="/history"><i className="bi bi-clock-history"></i> History</Link></li>
                                         <li><hr className="dropdown-divider" /></li>
                                         <li><button className="dropdown-item" onClick={() => { localStorage.removeItem('token'); window.location.href = '/login'; }}><i className="bi bi-box-arrow-right"></i> Logout</button></li>
                                     </ul>
