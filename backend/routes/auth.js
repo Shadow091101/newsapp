@@ -35,11 +35,11 @@ router.post('/signup', [
       password: secPass,
       email: req.body.email
     });
-    const data = {
-      id: user.id
-    }
-    const authtoken = jwt.sign(data, JWT_SECRET)
-    console.log(authtoken)
+    // const data = {
+    //   id: user.id
+    // }
+    // const authtoken = jwt.sign(data, JWT_SECRET)
+    // console.log(authtoken)
     res.json({ success, user })
     console.log("User Created : ", user)
   } catch (error) {
