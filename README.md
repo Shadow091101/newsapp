@@ -18,6 +18,17 @@ Built with a focus on speed, simplicity, and user engagement, NewsNerd curates t
 
 ---
 
+## 🔒 Backend Features
+
+- REST API integration using Express.js
+- JWT-based authentication
+- Password hashing using bcryptjs
+- Bookmark management APIs
+- NewsAPI handled securely through backend
+- MongoDB Atlas database integration
+
+---
+
 ## 🛠️ Tech Stack
 
 ### 💻 Frontend
@@ -26,6 +37,35 @@ Built with a focus on speed, simplicity, and user engagement, NewsNerd curates t
 - **Bootstrap 5** (CDN-based styling and responsive layout)
 - **React Top Loading Bar** (for loading progress indicator)
 
+### Backend
+- **Node.js**
+- **Express.js**
+  
+### Database 
+- **MongoDB Atlas**
+  
+### Authentication 
+- **JWT**
+- **bcryptjs**
+  
+### Deployment 
+- **Vercel(Frontend)**
+- **Render(Backend)**
+
+---
+
+## 🏗️ Project Architecture
+
+Frontend: React.js deployed on Vercel  
+Backend: Node.js + Express deployed on Render  
+Database: MongoDB Atlas  
+External API: NewsAPI  
+
+Flow:
+React Frontend → Express Backend → NewsAPI / MongoDB Atlas
+
+---
+  
 ### 🌐 APIs
 - **[NewsAPI.org](https://newsapi.org/)** – For fetching news articles
 
@@ -42,10 +82,25 @@ Built with a focus on speed, simplicity, and user engagement, NewsNerd curates t
 
 Below are the major external dependencies used in this project:
 
+---
+
+## 🔐 Environment Variables
+
+### Frontend
+REACT_APP_API_URL=your_backend_url
+
+### Backend
+MONGO_URI=your_mongodb_atlas_uri
+NEWS_API_KEY=your_newsapi_key
+PORT=3500
+
+---
+
 ## Live Demo
 
-Frontend: https://your-vercel-link.vercel.app  
-Backend: https://your-render-backend.onrender.com
+Visit : https://newsapp-omrb.vercel.app/  
+
+---
 
 ```bash
 react
@@ -54,6 +109,10 @@ react-router-dom
 react-top-loading-bar
 bootstrap (via CDN)
 ```
+
+---
+
+**Status:** Live and Production-Deployed
 
 ---
 
