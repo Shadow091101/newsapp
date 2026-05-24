@@ -35,12 +35,17 @@ Built with a focus on speed, simplicity, and user engagement, NewsNerd curates t
 - `NewsItem` – Card UI for individual news articles
 - `Spinner` – Loading indicator while fetching news
 - `NoArticle` – Displayed when no articles match the search query
-
+- `and much more`
 ---
 
 ## 📦 Dependencies
 
 Below are the major external dependencies used in this project:
+
+## Live Demo
+
+Frontend: https://your-vercel-link.vercel.app  
+Backend: https://your-render-backend.onrender.com
 
 ```bash
 react
@@ -68,7 +73,7 @@ bootstrap (via CDN)
 
 ## 👨‍💻 Author
 
-**Developed by:** [Manav Ujwal Naik (Shadow091101)]  
+**Developed by:** Manav Ujwal Naik (Shadow091101)
 **Tech Stack:** MERN (React Focused)  
 **Status:** Fully Functional
 
