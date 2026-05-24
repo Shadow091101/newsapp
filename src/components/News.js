@@ -10,6 +10,7 @@ const News = (props) => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1)
     const [totalResults, setTotalResults] = useState(0);
+    const api_url=process.env.REACT_APP_API_URL
 
     const getDates = () => {
         const date = new Date();
@@ -97,7 +98,7 @@ const News = (props) => {
         let searchQuery = typeof props.query === 'string' && props.query.trim() !== ''
             ? `&q=${props.query.split(' ').join('+')}`
             : '';
-        let url = `https://newsapi.org/v2/top-headlines?country=${props.country}${searchQuery}&category=${props.category}&pageSize=20&page=${page}&from=${full_year}-${from_curr_month}-${curr_date - 1}&to=${full_year}-${curr_month + 1}-${curr_date}&apiKey=${props.apiKey}`
+        let url = `${process.env.REACT_APP_API_URL}/api/v1/news?country=${props.country}${searchQuery}&category=${props.category}&pageSize=20&page=${page}&from=${full_year}-${from_curr_month}-${curr_date - 1}&to=${full_year}-${curr_month + 1}-${curr_date}`;
 
         setLoading(true);
         props.updateProgress(30);

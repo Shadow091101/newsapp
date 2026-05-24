@@ -23,6 +23,22 @@ app.get("/", (req, res) => {
   res.send("NewsNerd Backend is running");
 });
 
+app.get("/api/v1/news",async(req,res)=>{
+  try{
+    const query=new URLSearchParams(req.query);
+    query.set("apiKey",process.env.NEWS_API_KEY);
+
+    const response=await fetch(
+      `https://newsapi.org/v2/top-headlines?${query.toString()}`
+    );
+    const data=await response.json();
+    res.json(data);
+  }catch(error){
+    res.status(500).json({error:"Failed to fetch news"})
+  }
+  }
+)
+
 const port = process.env.PORT || 6969;
 
 app.listen(port, "0.0.0.0", () => {
