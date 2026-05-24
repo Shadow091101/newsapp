@@ -111,7 +111,7 @@ function Navbar(props) {
                                     <img
                                         onClick={dropdown}
                                         src={user?.profileImage
-                                            ? `http://localhost:3500${user.profileImage}`
+                                            ? `${props.backendurl}${user.profileImage}`
                                             : `https://ui-avatars.com/api/?name=${user?.username}&size=40&bold=true&rounded=true&background=${user.backgroundColor}`}
                                         alt="User Avatar"
                                         className="dropdown-toggle"

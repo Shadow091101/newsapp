@@ -23,6 +23,7 @@ const App = () => {
   // console.log()
 
   const apiKey = process.env.REACT_APP_NEWS_API
+  const backendurl=process.env.REACT_APP_API_URL
   const location = useLocation();
   const navigate = useNavigate();
   const [drop_down_title, setDrop_down_title] = useState("Category")
@@ -57,7 +58,7 @@ const App = () => {
   return (
     <div>
       {!hideNavbar && (
-        <Navbar drop_down_title={drop_down_title} updateSearchText={updateSearchText} updateDropDownTitle={updateDropDownTitle} />
+        <Navbar drop_down_title={drop_down_title} updateSearchText={updateSearchText} updateDropDownTitle={updateDropDownTitle} backendurl={backendurl} />
       )}
       <LoadingBar
         color='#f11946'
@@ -67,16 +68,16 @@ const App = () => {
       />
       <Routes>
         <Route exact path='/' element={<News key={searchText + "home"} query={searchText} updateProgress={updateProgress} category="general" title='Top-HeadLines' updateSearchText={updateSearchText} apiKey={apiKey} updateDropDownTitle={updateDropDownTitle} />} />
-        <Route exact path='/login' element={<Login></Login>} />
-        <Route exact path='/signup' element={<Signup></Signup>} />
-        <Route exact path='/business' element={<News key={searchText + "business"} updateProgress={updateProgress} category="business" title='Business' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
-        <Route exact path='/entertainment' element={<News key={searchText + "entertainment"} updateProgress={updateProgress} category="entertainment" updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} title='Entertainment' updateDropDownTitle={updateDropDownTitle} />} />
-        <Route exact path='/general' element={<News key={searchText + "general"} updateProgress={updateProgress} category="general" title='General' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
-        <Route exact path='/health' element={<News key={searchText + "health"} updateProgress={updateProgress} category="health" title='Health' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
-        <Route exact path='/science' element={<News key={searchText + "science"} updateProgress={updateProgress} category="science" title='Science' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
-        <Route exact path='/sports' element={<News key={searchText + "sports"} updateProgress={updateProgress} category="sports" title='Sports' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
-        <Route exact path='/technology' element={<News key={searchText + "technology"} updateProgress={updateProgress} category="technology" title='Technology' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
-        <Route exact path="/profile" element={<Profile title="Hello."/>}/>
+        <Route exact path='/login' element={<Login backendurl={backendurl}></Login>} />
+        <Route exact path='/signup' element={<Signup backendurl={backendurl}></Signup>} />
+        <Route exact path='/business' element={<News backendurl={backendurl} key={searchText + "business"} updateProgress={updateProgress} category="business" title='Business' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path='/entertainment' element={<News backendurl={backendurl} key={searchText + "entertainment"} updateProgress={updateProgress} category="entertainment" updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} title='Entertainment' updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path='/general' element={<News backendurl={backendurl} key={searchText + "general"} updateProgress={updateProgress} category="general" title='General' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path='/health' element={<News backendurl={backendurl} key={searchText + "health"} updateProgress={updateProgress} category="health" title='Health' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path='/science' element={<News backendurl={backendurl} key={searchText + "science"} updateProgress={updateProgress} category="science" title='Science' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path='/sports' element={<News backendurl={backendurl} key={searchText + "sports"} updateProgress={updateProgress} category="sports" title='Sports' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path='/technology' element={<News backendurl={backendurl} key={searchText + "technology"} updateProgress={updateProgress} category="technology" title='Technology' updateSearchText={updateSearchText} apiKey={apiKey} query={searchText} updateDropDownTitle={updateDropDownTitle} />} />
+        <Route exact path="/profile" element={<Profile backendurl={backendurl} title="Hello."/>}/>
         <Route exact path='/bookmarks' element={<Bookmarks />} />
         <Route exact path="/history" element={<History />} />
       </Routes>

@@ -19,6 +19,10 @@ app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/bookmark',bookmarkRoutes);
 app.use('/api/v1/user/',require("./routes/user"))
 
+app.get("/", (req, res) => {
+  res.send("NewsNerd Backend is running");
+});
+
 const port = process.env.PORT || 6969;
 
 app.listen(port, "0.0.0.0", () => {

@@ -155,6 +155,7 @@ const News = (props) => {
                             return (
                                 <div className="news-card-column" key={element.url}>
                                     <NewsItem
+                                        backendurl={props.backendurl}
                                         title={Title}
                                         description={Description}
                                         imageUrl={element.urlToImage}

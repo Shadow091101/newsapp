@@ -30,7 +30,7 @@ const Login = (props) => {
     alert(formData.email)
     alert(formData.password)
 
-    const response = await fetch('http://localhost:3500/api/v1/auth/login',{
+    const response = await fetch(`${props.backendurl}/api/v1/auth/login`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json",

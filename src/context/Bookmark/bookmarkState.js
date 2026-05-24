@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import bookmarkContext from "./bookmarkContext";
 
 const BookmarkState = (props) => {
+    const backendurl=process.env.REACT_APP_API_URL;
     const [bookmarks, setBookmarks] = useState([]);
     const getBookmarks = useCallback(async () => {
         try {
-            const response = await fetch(`http://localhost:3500/api/v1/bookmark/getbookmarks`, {
+            const response = await fetch(`${backendurl}/api/v1/bookmark/getbookmarks`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -23,7 +24,7 @@ const BookmarkState = (props) => {
     }, []);
 
     const addBookmark=async(article)=>{
-        const res=await fetch(`http://localhost:3500/api/v1/bookmark/postbookmarks`,{
+        const res=await fetch(`${backendurl}/api/v1/bookmark/postbookmarks`,{
             method:"POST",
             headers:{
                 "Content-Type":"application/json",
@@ -36,7 +37,7 @@ const BookmarkState = (props) => {
     };
 
     const removeBookmark=async(id)=>{
-        await fetch(`http://localhost:3500/api/v1/bookmark/deletebookmark/${id}`,{
+        await fetch(`${backendurl}/api/v1/bookmark/deletebookmark/${id}`,{
             method:"DELETE",
             headers:{
                 "auth-token":localStorage.getItem("token")

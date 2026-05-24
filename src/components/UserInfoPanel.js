@@ -4,7 +4,7 @@ import "../userinfopanel.css"
 import profileContext from '../context/Profile/profileContext'
 
 
-function UserInfoPanel() {
+function UserInfoPanel(props) {
   const { user, getUser } = useContext(profileContext)
 
   const [showAccount_profilepic_modal, setshowAccount_profilepic_modal] = useState(false);
@@ -28,7 +28,7 @@ function UserInfoPanel() {
             <div className="profilepic">
               <img src={
                 user?.profileImage
-                  ? `http://localhost:3500${user.profileImage}` :
+                  ? `${props.backendurl}${user.profileImage}` :
                   `https://ui-avatars.com/api/?name=${user?.username}&size=40&bold=true&rounded=true&background=${user.backgroundColor}`
               } alt="" onClick={profilePicmodal} />
             </div>
@@ -69,7 +69,7 @@ function UserInfoPanel() {
                     <img
                       src={
                         user?.profileImage
-                          ? `http://localhost:3500${user.profileImage}`
+                          ? `${props.backendurl}${user.profileImage}`
                           : `https://ui-avatars.com/api/?name=${user?.username}&size=300&bold=true&rounded=true&background=${bg}`
                       }
                       alt=""

@@ -5,7 +5,8 @@ import '../newsitem.css'
 import profileContext from '../context/Profile/profileContext';
 
 
-const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source, category }) => {
+const NewsItem = (props)=>{
+  const { title, description, imageUrl, newsUrl, author, date, source, category,backendurl } = props;
 
   const { user } = useContext(profileContext);
   const { getUser } = useContext(profileContext);
@@ -70,7 +71,7 @@ const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source,
 
   const inc_art_read = async () => {
 
-    await fetch("http://localhost:3500/api/v1/user/addArticleReadCount", {
+    await fetch(`${backendurl}/api/v1/user/addArticleReadCount`, {
       method: "PUT",
       headers: {
         "auth-token": localStorage.getItem("token"),
@@ -80,7 +81,7 @@ const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source,
 
   const categoryfav = async () => {
     const safeCategory = category || "General";
-    await fetch("http://localhost:3500/api/v1/user/read-article", {
+    await fetch(`${backendurl}/api/v1/user/read-article`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +95,7 @@ const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source,
   }
 
   const updateStreak = async () => {
-    await fetch("http://localhost:3500/api/v1/user/update-streak", {
+    await fetch(`${backendurl}/api/v1/user/update-streak`, {
       method: "PUT",
       headers: {
         "auth-token": localStorage.getItem("token")

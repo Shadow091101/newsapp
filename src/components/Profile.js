@@ -7,7 +7,7 @@ import StatsPanel from "./StatsPanel";
 import SecurityPanel from "./SecurityPanel";
 
 
-function Profile() {
+function Profile(props) {
     console.log("Profile rendered");
 
     const [activeTab, setActiveTab] = useState("userinfo");
@@ -47,12 +47,12 @@ function Profile() {
 
             {/* Main Panel */}
             <div className="panel ">
-                {activeTab === "userinfo" && <UserInfoPanel />}
+                {activeTab === "userinfo" && <UserInfoPanel backendurl={props.backendurl} />}
                 {activeTab === "edit" && <EditProfilePanel />}
                 {activeTab === "stats" && <StatsPanel />}
                 {activeTab === "bookmarks" && <h3>Bookmarks</h3>}
                 {activeTab === "history" && <h3>History</h3>}
-                {activeTab === "security" && <SecurityPanel />}
+                {activeTab === "security" && <SecurityPanel backendurl={props.backendurl} />}
             </div>
 
         </div>

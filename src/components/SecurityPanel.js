@@ -2,7 +2,7 @@ import React, { useContext,useState,useEffect } from "react";
 import "../editprofilepanel.css"
 import profileContext from "../context/Profile/profileContext";
 
-function SecurityPanel() {
+function SecurityPanel(props) {
 
   const { user, getUser } = useContext(profileContext);
 
@@ -25,7 +25,7 @@ function SecurityPanel() {
       return;
     }
 
-    await fetch("http://localhost:3500/api/v1/user/newPass", {
+    await fetch(`${props.backendurl}/api/v1/user/newPass`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

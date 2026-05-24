@@ -2,10 +2,11 @@ import React, { useCallback, useState } from "react";
 import profileContext from "./profileContext";
 
 const ProfileState = (props) => {
+    const backendurl = process.env.REACT_APP_API_URL;
     const [user, setUser] = useState({});
     const getUser = useCallback(async () => {
         try {
-            const response = await fetch(`http://localhost:3500/api/v1/auth/user`, {
+            const response = await fetch(`${backendurl}/api/v1/auth/user`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
