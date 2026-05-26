@@ -132,8 +132,8 @@ bootstrap (via CDN)
 
 ## 👨‍💻 Author
 
-**Developed by:** Manav Ujwal Naik (Shadow091101)
-**Tech Stack:** MERN (React Focused)  
-**Status:** Fully Functional
+- **Developed by:** Manav Ujwal Naik (Shadow091101)
+- **Tech Stack:** MERN (React Focused)  
+- **Status:** Fully Functional
 
 ---
